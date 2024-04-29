@@ -1,0 +1,9 @@
+<h1 class="page-header">Send A Message</h1>
+<form (submit)="onMessageSubmit()">
+    <div class="form-group">
+        <label>Message</label>
+            <textarea class="form-control messageField" [(ngModel)]="message" name="message">
+            </textarea>
+    </div>
+    <input type="submit" class="btn btn-success" value="Submit">
+</form>

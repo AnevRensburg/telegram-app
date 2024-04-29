@@ -1,0 +1,16 @@
+<h1 class="page-header">Previous Messages</h1>
+<table class="table">
+  <thead class="table-success">
+    <tr>
+      <th scope="col">Time Sent</th>
+      <th scope="col" class="w-75">Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let message of messages">
+      <td>{{message.time}}</td>
+      <td>{{message.message}}</td>
+    </tr>
+  </tbody>
+</table>
+
