@@ -3,7 +3,7 @@ var router = express.Router();
 const passport = require('passport');
 const save = require('../models/save')
 
-// store the message
+// Store the message in the database
 router.post("/message", async function(req, res, next) {
 
   console.log('req body', req.body);
@@ -18,7 +18,7 @@ router.post("/message", async function(req, res, next) {
   res.send({success:true, msg: 'Message stored successfully'});
 });
 
-// get messages back
+// Get messages back from the database
 router.get("/", async function(req, res, next) {
 
   let returnedArray = await save.getMessages();

@@ -9,26 +9,32 @@ import { MessageService } from 'src/app/services/message.service';
 
 export class MessageComponent {
   message: any;
+  messages: any[] = [];
 
   constructor(
     private messageService: MessageService
-  ) { }
+  ) {}
 
-  onMessageSubmit() { // On Submit, clear form
-    // const messageInput = this.message;
-    // console.log(messageInput);
-    // this.message = '';
-
-    // Get message content from form and time
+  onMessageSubmit() { 
+    // Get message content from form input
     const messageData = {
       message: this.message
     }
     console.log(messageData);
 
-    // Store Message Data Locally      
+    // Store message content Locally
     this.messageService.storeMessageData(messageData).subscribe((data:any) => {
       console.log(data);
+      // Clear message input field if message is successfully stored
       if(data.success) this.message = '';
+      // Refresh message list
+      // if(data.success) this.messageService.refreshMessageList();
     });
+
+    refreshPage();
   }
+}
+
+function refreshPage() {
+  window.location.reload();
 }

@@ -8,16 +8,16 @@ import { MessageService } from 'src/app/services/message.service';
 })
 
 export class MessagelistComponent implements OnInit{
-
   messages:any[] = [];
 
   constructor(
-    private messageService: MessageService
-  ){ }
+    private messageService: MessageService,
+  ){}
 
-  // When Page is reloaded
-  ngOnInit(): void { 
+  // Get message list
+  loadMessages(): void {
     this.messageService.getMessages().subscribe((records:any) => {
+      // Convert time to local time
       records.forEach((record:any) => {
         record.time = new Date(record.time).toLocaleString();
       })
@@ -25,7 +25,17 @@ export class MessagelistComponent implements OnInit{
     });
   }
 
-  refresh() {
+  // When page is reloaded, get the latest message list
+  ngOnInit(): void {
+    this.loadMessages();
   }
 
+  // Refresh message list
+  // refreshMessages() {
+  //   this.loadMessages();
+  // }
 }
+
+
+
+

@@ -7,11 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Components
 import { AppComponent } from './app.component';
-import { MessageComponent } from './components/message/message.component';
+import { MessageComponent } from './message/message.component';
+import { MessagelistComponent } from './message-list/messagelist.component';
 
 // Services
 import {MessageService} from './services/message.service';
-import { MessagelistComponent } from './messagelist/messagelist.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { MessagelistComponent } from './messagelist/messagelist.component';
     HttpClientModule
   ],
   // Services
-  providers: [MessageService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [MessageService]
 })
 export class AppModule { }

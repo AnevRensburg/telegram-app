@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const config = require('../config/database');
 
 // Message Data Format
-
 const messageShape = mongoose.Schema ({
     message: {
         type: String
