@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Components
 import { AppComponent } from './app.component';
-import { MessageComponent } from './message/message.component';
+import { MessageComponent } from './message-create/messagecreate.component';
 import { MessagelistComponent } from './message-list/messagelist.component';
 
 // Services

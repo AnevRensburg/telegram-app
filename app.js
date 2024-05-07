@@ -10,19 +10,16 @@ const config = require('./config/database');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var messagesRouter = require('./routes/messages');
-// const { config } = require('process');
 
 var app = express();
 app.use(cors());
 
 // Connect to database
 mongoose.connect(config.database);
-
 // On Connection
 mongoose.connection.on('connected', () => {
     console.log('Connected to database '+config.database);
 });
-
 // On Error
 mongoose.connection.on('error', (err) => {
     console.log('Database error '+err);
@@ -38,6 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
