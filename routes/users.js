@@ -36,6 +36,7 @@ router.post("/authenticate", async function(req, res, next) {
     if(!user){
       return res.status(404).json({success: false, msg: 'User not found'});
     }
+
     // else, compare the password from the request body with the password from the user object
     const isMatch = await save.comparePassword(password, user.password);
     // if password is not a match, return a 401 status and a message
@@ -43,7 +44,7 @@ router.post("/authenticate", async function(req, res, next) {
       return res.status(401).json({success: false, msg: 'Wrong Password'});
     }
     // else, create a token with the user object and the secret key
-    const token = jwt.sign({user}, config.secret, {
+    const token = jwt.sign({username: user.username}, config.secret, {
         expiresIn: 604800 // 1 week
     });
 
@@ -63,13 +64,12 @@ router.post("/authenticate", async function(req, res, next) {
 });
 
 // User Profile
-router.get("/profile", passport.authenticate('jwt', {session:false}), async function(req, res, next) {
+router.get("/profile", passport.authenticate('jwt', {session:false}), function(req, res, next){
   res.json({user: req.user});
 });
 
 // Get users back from the database
 router.get("/", async function(req, res, next) {
-
   let returnedArray = await save.getUsers();
   res.send(returnedArray);
 });

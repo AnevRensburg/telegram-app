@@ -56,8 +56,10 @@ function getUserById(id){
 
 // Get User by Username
 async function getUserByUsername(username){
+    console.log('getUserByUsername', username)
     try {
         let user = await User.findOne({username: username});
+        console.log(user);
         return user;
     } catch (err) {
         console.log(err);

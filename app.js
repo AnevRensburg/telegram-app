@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 const passport = require('passport');
-// require('./config/passport')(passport);
+require('./config/passport')(passport);
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -37,14 +37,11 @@ app.use(session({
   cookie: { secure: true }
 }))
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 // CORS Middleware
 app.use(cors());
 
 // Port Number
-const port = 3000;
+const port = 3001;
 
 // Set Static Folder
 app.set('views', path.join(__dirname, 'views'));
@@ -62,8 +59,6 @@ app.use(bodyParser.json());
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-const passport2 = config.passport;
 
 // Routes
 app.use('/', indexRouter);
