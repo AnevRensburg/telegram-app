@@ -1,18 +1,22 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
+const createError = require('http-errors');
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
 const mongoose = require('mongoose');
 const config = require('./config/database');
+const passport = require('passport');
+// require('./config/passport')(passport);
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var messagesRouter = require('./routes/messages');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const messagesRouter = require('./routes/messages');
 
-var app = express();
-app.use(cors());
+const app = express();
 
 // Connect to database
 mongoose.connect(config.database);
@@ -25,8 +29,24 @@ mongoose.connection.on('error', (err) => {
     console.log('Database error '+err);
 });
 
+// Session Middleware
+app.use(session({
+  secret: config.secret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
-// view engine setup
+app.use(passport.initialize());
+app.use(passport.session());
+
+// CORS Middleware
+app.use(cors());
+
+// Port Number
+const port = 3000;
+
+// Set Static Folder
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -36,7 +56,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Body Parser Middleware
+app.use(bodyParser.json());
 
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+const passport2 = config.passport;
+
+// Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/messages', messagesRouter);
@@ -58,8 +87,8 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+app.listen(port, () => {
+  console.log('Server is running on port '+port);
 });
 
 module.exports = app;
