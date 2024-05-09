@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -36,6 +36,8 @@ import { ValidateService } from './services/validate.service';
   ],
   // Services
   bootstrap: [AppComponent],
-  providers: [ValidateService]
+  providers: [
+    ValidateService
+  ]
 })
 export class AppModule { }

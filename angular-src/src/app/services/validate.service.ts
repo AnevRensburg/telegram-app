@@ -6,4 +6,13 @@ import { Injectable } from '@angular/core';
 export class ValidateService {
 
   constructor() { }
+
+  validateSignup(user: any){
+    if(user.username == undefined || user.password == undefined){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  
 }

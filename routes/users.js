@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const save = require('../models/save');
 
-// Register User
-router.post("/register", async function(req, res, next) {
+// Signup User
+router.post("/signup", async function(req, res, next) {
   console.log('req body', req.body);
   let newUserObject = new save.User({
     username: req.body.username,
@@ -16,13 +16,13 @@ router.post("/register", async function(req, res, next) {
 
   await save.saveUser(newUserObject);
   console.log('saveUser returned');
-  res.send({success:true, msg: 'User registered successfully'});
+  res.send({success:true, msg: 'User signed up successfully'});
 });
 
 
 
-// Authenticate User
-router.post("/authenticate", async function(req, res, next) {
+// Signin User
+router.post("/signin", async function(req, res, next) {
   console.log('Request body', req.body);
   const username = req.body.username;
   const password = req.body.password;
@@ -34,14 +34,14 @@ router.post("/authenticate", async function(req, res, next) {
     const user = await save.getUserByUsername(username);
     // if there is no user, return a 404 status and a message
     if(!user){
-      return res.status(404).json({success: false, msg: 'User not found'});
+      return res.json({success: false, msg: 'User not found'});
     }
 
     // else, compare the password from the request body with the password from the user object
     const isMatch = await save.comparePassword(password, user.password);
     // if password is not a match, return a 401 status and a message
     if(!isMatch){
-      return res.status(401).json({success: false, msg: 'Wrong Password'});
+      return res.json({success: false, msg: 'Wrong Password'});
     }
     // else, create a token with the user object and the secret key
     const token = jwt.sign({username: user.username}, config.secret, {
