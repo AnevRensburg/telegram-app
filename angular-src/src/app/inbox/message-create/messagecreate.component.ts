@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { MessageService } from 'src/app/services/message.service';
+import { MessageService } from 'src/app/inbox/services/message.service';
 
 @Component({
-  selector: 'app-message',
+  selector: 'app-messagecreate',
   templateUrl: './messagecreate.component.html',
   styleUrls: ['./messagecreate.component.scss']
 })
 
-export class MessageComponent {
+export class MessagecreateComponent {
   message: any;
   messages: any[] = [];
 
