@@ -8,7 +8,7 @@ const bot = new Telegraf('7060166746:AAEnrVyyEseJTixUxpgMNsi89sLVLFxdaOE');
 // Channel ID
 const channelId = '-1002103448345';
 // Function to forward messages to the Telegram channel
-function forwardToTelegram(message) {
+async function forwardToTelegram(message) {
     bot.telegram.sendMessage(channelId, message);
 }
 
@@ -22,11 +22,14 @@ router.post("/message", async function(req, res, next) {
 
   await save.saveMessage(newMessageObject);
   console.log('saveMessage returned');
-  res.send({success:true, msg: 'Message stored successfully'});
 
 
   // Forward the message to the Telegram channel
-  forwardToTelegram(req.body.message);
+  await forwardToTelegram(req.body.message);
+
+  await res.send({success:true, msg: 'Message stored successfully and forwarded to Telegram channel'});
+
+  console.log('2.0 Message stored successfully and forwarded to Telegram channel');
 });
 
 // Get messages back from the database

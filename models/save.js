@@ -13,7 +13,8 @@ const messageShape = mongoose.Schema ({
 });
 
 const Message = mongoose.model('Message', messageShape);
-function saveMessage(newMessageObject){
+
+async function saveMessage(newMessageObject){
     newMessageObject.save();
 }
 function getMessages(){

@@ -19,13 +19,9 @@ export class MessageService {
 
   // Get Message Data Locally (port 3000)
   getMessages(){
-    return this.http.get('http://localhost:3000/messages', {responseType:'json'});    
+    console.log('getMessages Function')
+    return this.http.get('http://localhost:3000/messages/', {responseType:'json'});    
   }
-
-  // refreshMessageList() { 
-  //   // Call the refreshMessages() function in the MessageListComponent
-  //   this.messageListComponent.refreshMessages();
-  // }
 }
 
 

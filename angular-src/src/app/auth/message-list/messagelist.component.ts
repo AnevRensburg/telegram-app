@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'src/app/auth/dashboard/inbox/services/message.service';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-messagelist',
@@ -15,7 +15,7 @@ export class MessagelistComponent implements OnInit{
   ){}
 
   // Get message list
-  loadMessages(): void {
+   loadMessages() {
     this.messageService.getMessages().subscribe((records:any) => {
       // Convert time to local time
       records.forEach((record:any) => {

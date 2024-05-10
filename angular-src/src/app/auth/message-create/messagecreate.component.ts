@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageService } from 'src/app/auth/dashboard/inbox/services/message.service';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-messagecreate',
@@ -20,18 +20,14 @@ export class MessagecreateComponent {
     const messageData = {
       message: this.message
     }
-    console.log(messageData);
 
     // Store message content Locally
     this.messageService.storeMessageData(messageData).subscribe((data:any) => {
-      console.log(data);
       // Clear message input field if message is successfully stored
       if(data.success) this.message = '';
-      // Refresh message list
-      // if(data.success) this.messageService.refreshMessageList();
+      refreshPage();
     });
 
-    refreshPage();
   }
 }
 

@@ -13,6 +13,8 @@ import { ProfileComponent } from './auth/profile/profile.component';
 import { DashboardComponent } from './auth/dashboard/dashboard.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { MessagecreateComponent} from './auth/message-create/messagecreate.component';
+import { MessagelistComponent } from './auth/message-list/messagelist.component';
 
 // Services
 import { ValidateService } from './services/validate.service';
@@ -26,7 +28,9 @@ import { ValidateService } from './services/validate.service';
     ProfileComponent,
     DashboardComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    MessagecreateComponent,
+    MessagelistComponent
   ],
   imports: [
     BrowserModule,
