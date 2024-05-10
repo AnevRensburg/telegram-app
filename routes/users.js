@@ -8,6 +8,7 @@ const save = require('../models/save');
 // Signup User
 router.post("/signup", async function(req, res, next) {
   console.log('req body', req.body);
+
   let newUserObject = new save.User({
     username: req.body.username,
     password: req.body.password,
@@ -20,26 +21,19 @@ router.post("/signup", async function(req, res, next) {
 });
 
 
-
 // Signin User
 router.post("/signin", async function(req, res, next) {
   console.log('Request body', req.body);
+
   const username = req.body.username;
   const password = req.body.password;
 
   try {
-    // the username gets passed in from the request body
-    // the user variable wait to be assigned the result of the getUserByUsername function
-    // the getUserByUsername function is an async function that returns a promise
     const user = await save.getUserByUsername(username);
-    // if there is no user, return a 404 status and a message
     if(!user){
       return res.json({success: false, msg: 'User not found'});
     }
-
-    // else, compare the password from the request body with the password from the user object
     const isMatch = await save.comparePassword(password, user.password);
-    // if password is not a match, return a 401 status and a message
     if(!isMatch){
       return res.json({success: false, msg: 'Wrong Password'});
     }
@@ -59,7 +53,7 @@ router.post("/signin", async function(req, res, next) {
   // if there is an error, log the error and return a 500 status and a message
   } catch (err) { 
     console.error(err);
-    res.status(500).json({success: false, msg: 'An error occurred'});
+    res.status(500).json({success: false, msg: 'An error occurred while trying to sign in.'});
   }
 });
 

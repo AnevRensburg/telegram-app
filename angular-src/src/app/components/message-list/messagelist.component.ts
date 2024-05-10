@@ -15,7 +15,7 @@ export class MessagelistComponent implements OnInit{
   ){}
 
   // Get message list
-   loadMessages() {
+  loadMessages() {
     this.messageService.getMessages().subscribe((records:any) => {
       // Convert time to local time
       records.forEach((record:any) => {
@@ -25,15 +25,9 @@ export class MessagelistComponent implements OnInit{
     });
   }
 
-  // When page is reloaded, get the latest message list
-  ngOnInit(): void {
+  ngOnInit(): any{
     this.loadMessages();
   }
-
-  // Refresh message list
-  // refreshMessages() {
-  //   this.loadMessages();
-  // }
 }
 
 

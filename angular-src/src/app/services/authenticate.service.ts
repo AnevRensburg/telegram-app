@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +8,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class AuthService {
   authToken: any;
   user: any;
-
+  
   constructor(
     private http:HttpClient,
-    // public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService
     ) { }
 
   signupUser(user: any){
@@ -39,29 +39,28 @@ export class AuthService {
     localStorage.clear();
   }
 
-  // getProfile(){
-  //   this.loadToken();
-  //   // let headers = new HttpHeaders();
-  //   const headers = new HttpHeaders({
-  //     'Content-Type':  'application/json',
-  //     'Authorization': this.authToken
-  //   });
-  //   headers.append('Authorization', 'this.authToken');
-  //   headers.append('Content-Type','application/json');
-  //   return this.http.get('http://localhost:3000/users/profile', {headers: headers, responseType:'json'});
-  // }
+  getProfile(){
+    this.loadToken();
+    const headers = new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': this.authToken
+    });
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/users/profile', {headers: headers, responseType:'json'});
+  }
 
-
-
-  // loadToken(){
-  //   const token = localStorage.getItem('id_token');
-  //   this.authToken = token;
-  // }
+  loadToken(){
+    const token = localStorage.getItem('id_token');
+    this.authToken = token;
+  }
 
   // returns true if the token is not expired
-  // loggedIn(){
-  //   return !this.jwtHelper.isTokenExpired();
-  // }
+  loggedIn(){
+    return !this.jwtHelper.isTokenExpired();
+  }
+
+
 }
 
 

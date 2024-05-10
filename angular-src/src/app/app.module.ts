@@ -2,30 +2,29 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
-
 
 // Components
 import { AppComponent } from './app.component';
-import { NavbarComponent} from './auth/navbar/navbar.component';
-import { HomeComponent } from './auth/home/home.component';
-import { ProfileComponent } from './auth/profile/profile.component';
-import { DashboardComponent } from './auth/dashboard/dashboard.component';
-import { SigninComponent } from './auth/signin/signin.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { MessagecreateComponent} from './auth/message-create/messagecreate.component';
-import { MessagelistComponent } from './auth/message-list/messagelist.component';
+import { NavbarComponent} from './components/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { MessagecreateComponent} from './components/message-create/messagecreate.component';
+import { MessagelistComponent } from './components/message-list/messagelist.component';
 
 // Services
 import { ValidateService } from './services/validate.service';
-
+import { AuthService } from './services/authenticate.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    ProfileComponent,
     DashboardComponent,
     SigninComponent,
     SignupComponent,
@@ -36,12 +35,21 @@ import { ValidateService } from './services/validate.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function tokenGetter() {
+          return localStorage.getItem('id_token');
+        }
+      }
+    })
   ],
   // Services
   bootstrap: [AppComponent],
   providers: [
-    ValidateService
+    ValidateService, 
+    AuthService,
+    AuthGuard
   ]
 })
 export class AppModule { }
