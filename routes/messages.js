@@ -1,4 +1,5 @@
 var express = require('express');
+const passport = require('passport'); 
 var router = express.Router();
 const save = require('../models/save');
 const { Telegraf } = require('telegraf');
@@ -13,7 +14,7 @@ async function forwardToTelegram(message) {
 }
 
 // Store the message in the database
-router.post("/message", async function(req, res, next) {
+router.post("/message", passport.authenticate('jwt', {session:false}), async function(req, res, next) {
   console.log('req body', req.body);
   let newMessageObject = new save.Message({
     message: req.body.message,

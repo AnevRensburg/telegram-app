@@ -50,10 +50,9 @@ router.post("/signin", async function(req, res, next) {
         username: user.username
       }
     });
-  // if there is an error, log the error and return a 500 status and a message
   } catch (err) { 
     console.error(err);
-    res.status(500).json({success: false, msg: 'An error occurred while trying to sign in.'});
+    res.json({success: false, msg: 'An error occurred while trying to sign in.'});
   }
 });
 
