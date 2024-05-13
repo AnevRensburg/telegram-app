@@ -56,9 +56,17 @@ router.post("/signin", async function(req, res, next) {
   }
 });
 
-// User Profile
-router.get("/profile", passport.authenticate('jwt', {session:false}), function(req, res, next){
-  res.json({user: req.user});
+// Get User Profile
+router.get("/profile", passport.authenticate('jwt', {session:false}), async function(req, res, next){
+  console.log('Trying to get user profile');
+  try {
+    console.log('Getting user profile');
+    console.log('req', req);
+    res.json({user: req.user});
+  } catch (error) {
+    console.error('Error:', error);
+    next(error);
+  }
 });
 
 // Get users back from the database

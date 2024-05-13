@@ -48,9 +48,11 @@ function saveUser(newUserObject){
         });
     });
 }
+
 function getUsers(){
     return User.find().sort({time:-1});
 }
+
 function getUserById(id){
     User.findById(id);
 }
