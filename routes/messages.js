@@ -17,9 +17,10 @@ async function forwardToTelegram(message) {
 router.post("/message", passport.authenticate('jwt', {session:false}), async function(req, res, next) {
   let newMessageObject = new save.Message({
     message: req.body.message,
-    username: req.body.username,
+    username: req.user.username,
     time: new Date()
   });
+  console.log('newMessageObject', newMessageObject);
   await save.saveMessage(newMessageObject);
   console.log('saveMessage returned');
   // Forward the message to the Telegram channel
