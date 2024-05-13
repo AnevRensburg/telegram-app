@@ -7,6 +7,9 @@ const messageShape = mongoose.Schema ({
     message: {
         type: String
     },
+    username: { 
+        type: String
+    },
     time: {
         type: Date
     }

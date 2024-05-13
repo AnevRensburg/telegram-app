@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,17 +28,12 @@ export class AuthService {
     return this.http.post('http://localhost:3000/users/signin', {username: username, password:password}, {headers: headers, responseType:'json'});
   }
 
-  async getProfile() {
-    await this.loadToken();
-    console.log('Token: ' + this.authToken);
-    // let headers = new HttpHeaders({
-    //   'Content-Type': 'application/json',
-    //   'Authorization': this.authToken
-    // });
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', this.authToken);
-    headers = headers.append('Content-Type', 'application/json');
-    console.log('Headers: ' + headers);
+  getProfile(): Observable<any>{
+    this.loadToken();
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.authToken
+    });
     return this.http.get('http://localhost:3000/users/profile', {headers: headers, responseType:'json'});
   }
 
@@ -47,7 +44,7 @@ export class AuthService {
     this.user = user;
   }
 
-  async loadToken(){
+  loadToken(){
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }

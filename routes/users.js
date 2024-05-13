@@ -58,14 +58,12 @@ router.post("/signin", async function(req, res, next) {
 
 // Get User Profile
 router.get("/profile", passport.authenticate('jwt', {session:false}), async function(req, res, next){
-  console.log('Trying to get user profile');
   try {
-    console.log('Getting user profile');
-    console.log('req', req);
+    console.log('User: ', req.user);
     res.json({user: req.user});
-  } catch (error) {
-    console.error('Error:', error);
-    next(error);
+  } catch (err) {
+    console.error(err);
+    res.json({success: false, msg: 'An error occurred while fetching user data.'});
   }
 });
 

@@ -15,22 +15,17 @@ async function forwardToTelegram(message) {
 
 // Store the message in the database
 router.post("/message", passport.authenticate('jwt', {session:false}), async function(req, res, next) {
-  console.log('req body', req.body);
   let newMessageObject = new save.Message({
     message: req.body.message,
+    username: req.body.username,
     time: new Date()
   });
-
   await save.saveMessage(newMessageObject);
   console.log('saveMessage returned');
-
-
   // Forward the message to the Telegram channel
   await forwardToTelegram(req.body.message);
-
-  await res.send({success:true, msg: 'Message stored successfully and forwarded to Telegram channel'});
-
-  console.log('2.0 Message stored successfully and forwarded to Telegram channel');
+  res.send({success:true, msg: 'Message stored successfully and forwarded to Telegram channel'});
+  console.log('Message stored successfully and forwarded to Telegram channel');
 });
 
 // Get messages back from the database
