@@ -3,7 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const save = require('../models/save');
 const { Telegraf } = require('telegraf');
-const private = require('../private/keys');
+const private = require('../private/private');
 
 // Bot ID
 const bot = new Telegraf(private.botId);

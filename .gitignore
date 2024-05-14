@@ -5,9 +5,9 @@ private
 /private
 /private/
 ./private
-private/keys.js
-/private/keys.js
-/keys.js
+private/private.js
+/private/private.js
+/private.js
 
 # Compiled output
 /dist
