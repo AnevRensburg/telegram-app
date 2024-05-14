@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ValidateService } from 'src/app/services/validate.service';
 import { AuthService } from 'src/app/services/authenticate.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,8 @@ export class SignupComponent {
   constructor(
     private validateService:ValidateService,
     private authService:AuthService,
-    private router:Router
+    private router:Router,
+    private snackBar: MatSnackBar
   ){}
 
   onSignupSubmit(){
@@ -26,16 +28,18 @@ export class SignupComponent {
 
     // Required Fields
     if(!this.validateService.validateSignup(user)){
-      alert('Please fill in all fields');
+      this.snackBar.open('Please fill in all fields', 'Close');
     }
 
     // Signup User
     this.authService.signupUser(user).subscribe((data: any) => {
       if (data['success']){
-        alert('Signup was a success!')
+        this.snackBar.open('Signup was a success!', 'Close', {
+          duration: 3000
+        });
         this.router.navigate(['/signin']);
       } else {
-        alert('Something went wrong...')
+        this.snackBar.open("Couldn't sign up", 'Close');
         this.router.navigate(['/signup']);
       }
     })

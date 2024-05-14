@@ -5,6 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
+// import { AgGridModule } from 'ag-grid-angular';
+
 // Components
 import { AppComponent } from './app.component';
 import { NavbarComponent} from './components/navbar/navbar.component';
@@ -20,6 +27,7 @@ import { MessagelistComponent } from './components/message-list/messagelist.comp
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/authenticate.service';
 import { AuthGuard } from './guards/auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -31,7 +39,7 @@ import { AuthGuard } from './guards/auth.guard';
     SignupComponent,
     MessagecreateComponent,
     MessagelistComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +52,13 @@ import { AuthGuard } from './guards/auth.guard';
           return localStorage.getItem('id_token');
         }
       }
-    })
+    }),
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    // AgGridModule
   ],
   // Services
   bootstrap: [AppComponent],

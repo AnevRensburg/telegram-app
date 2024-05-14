@@ -8,12 +8,12 @@ import { MessageService } from 'src/app/services/message.service';
 })
 
 export class MessagelistComponent implements OnInit{
-  messages:any[] = [];
+  messages: any = [];
 
   constructor(
-    private messageService: MessageService,
+    private messageService: MessageService
   ){}
-
+  
   // Get message list
   loadMessages() {
     this.messageService.getMessages().subscribe((records:any) => {
@@ -29,7 +29,3 @@ export class MessagelistComponent implements OnInit{
     this.loadMessages();
   }
 }
-
-
-
-

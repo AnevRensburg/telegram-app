@@ -18,8 +18,10 @@ const messageShape = mongoose.Schema ({
 const Message = mongoose.model('Message', messageShape);
 
 async function saveMessage(newMessageObject){
-    newMessageObject.save();
+    newMessageObject.save(); // Returns success true or false
 }
+
+
 function getMessages(){
     return Message.find().sort({time:-1});
 }

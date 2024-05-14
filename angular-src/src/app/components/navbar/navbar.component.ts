@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/authenticate.service';
 import { Router  } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navbar',
@@ -11,12 +12,15 @@ export class NavbarComponent {
 
   constructor(
     public authService: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
     ) { }
 
   onLogoutClick(){
     this.authService.logout();
-    alert('You are now signed out');
+    this.snackBar.open('You are now logged out', 'Close', {
+      duration: 3000
+    });
     this.router.navigate(['/signin']);
     return false;
   }
