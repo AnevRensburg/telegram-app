@@ -1,9 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# Secrets
-
-# Private keys
-/private.js
+# Private folder
+private
+/private
+/private/
+./private
+private/keys.js
+/private/keys.js
+/keys.js
 
 # Compiled output
 /dist
