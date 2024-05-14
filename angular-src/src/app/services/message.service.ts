@@ -13,7 +13,6 @@ export class MessageService {
 
   // Store Message Data Locally (port 3000)
   storeMessageData(messageData: any){
-    localStorage.setItem('messageData', JSON.stringify(messageData));
     this.loadToken();
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',

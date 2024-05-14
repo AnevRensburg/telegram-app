@@ -1,13 +1,14 @@
-var express = require('express');
+const express = require('express');
 const passport = require('passport'); 
-var router = express.Router();
+const router = express.Router();
 const save = require('../models/save');
 const { Telegraf } = require('telegraf');
+const private = require('../private/private');
 
 // Bot ID
-const bot = new Telegraf('7060166746:AAEnrVyyEseJTixUxpgMNsi89sLVLFxdaOE');
+const bot = new Telegraf(private.botId);
 // Channel ID
-const channelId = '-1002103448345';
+const channelId = private.channelId;
 // Function to forward messages to the Telegram channel
 async function forwardToTelegram(message) {
     bot.telegram.sendMessage(channelId, message);

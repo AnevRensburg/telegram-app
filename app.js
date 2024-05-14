@@ -18,6 +18,8 @@ const messagesRouter = require('./routes/messages');
 
 const app = express();
 
+const private = require('./private/private');
+
 // Connect to database
 mongoose.connect(config.database);
 // On Connection
@@ -31,7 +33,7 @@ mongoose.connection.on('error', (err) => {
 
 // Session Middleware
 app.use(session({
-  secret: config.secret,
+  secret: private.secret,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: true }
