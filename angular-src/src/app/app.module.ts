@@ -10,7 +10,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
-// import { AgGridModule } from 'ag-grid-angular';
+import { AgGridModule } from 'ag-grid-angular';
 
 // Components
 import { AppComponent } from './app.component';
@@ -38,7 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SigninComponent,
     SignupComponent,
     MessagecreateComponent,
-    MessagelistComponent,
+    // MessagelistComponent,
     ProfileComponent,
   ],
   imports: [
@@ -58,7 +58,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    // AgGridModule
+    AgGridModule,
+    MessagelistComponent
   ],
   // Services
   bootstrap: [AppComponent],

@@ -1,5 +1,4 @@
-<h1 class="page-header">Previous Messages</h1>
-<table class="table">
+<!-- <table class="table">
   <thead class="table-success">
     <tr>
       <th scope="col" class="w-25">Time Sent</th>
@@ -14,5 +13,15 @@
       <td>{{message.message}}</td>
     </tr>
   </tbody>
-</table>
+</table> -->
+
+<h1 class="page-header">Previous Messages</h1>
+  <ag-grid-angular
+    [class]="themeClass"
+    [rowData]="rowData"
+    [columnDefs]="colDefs"
+    [defaultColDef]="defaultColDef"
+    (gridReady)="loadMessages($event)"
+  >
+  </ag-grid-angular> 
 

@@ -1,4 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+/* Core Grid CSS */
+@import 'ag-grid-community/styles/ag-grid.css';
+/* Quartz Theme Specific CSS */
+@import 'ag-grid-community/styles/ag-theme-quartz.css';
+
+
+.ag-header-row{
+    background-color: #56cc9d;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    padding: 10px;
+    text-align: center;
+
+}
+
+
+.ag-header-row-column{
+    background-color: #56cc9d;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    padding: 10px;
+    text-align: center;
+}
+
+.ag-header-row{
+    background-color: #56cc9d;
+    color: #fff;
+}
+.ag-grid-angular {
+    width: 100%;
+    min-width: 500px;
+    height: 500px;
+}
+ag-grid-angular {
+    width: 100%;
+    min-width: 500px;
+    height: 500px;
+}
+
+
+
 
 body{
     padding: 50px;
