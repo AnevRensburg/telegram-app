@@ -39,7 +39,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SignupComponent,
     MessagecreateComponent,
     // MessagelistComponent,
-    ProfileComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

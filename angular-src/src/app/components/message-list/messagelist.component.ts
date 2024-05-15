@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MessageService } from 'src/app/services/message.service';
 import { AgGridAngular } from "ag-grid-angular";
 import { ColDef, GridReadyEvent } from "ag-grid-community";
+import { WebsocketService } from 'src/app/services/websocket.service';
 
 // Row Data Interface
 interface IMessageData {
@@ -18,15 +19,15 @@ interface IMessageData {
   styleUrls: ['./messagelist.component.scss'],
 })
 
-export class MessagelistComponent{
+export class MessagelistComponent {
   messages: any = [];
   themeClass = "ag-theme-quartz";
   rowData!: IMessageData[];
 
   colDefs: ColDef<IMessageData>[] = [
-    { headerName: "Timestamp", field: "time" },
-    { headerName: "Username", field: "username" },
-    { headerName: "Message", field: "message" }
+    { headerName: "Timestamp", field: "time", flex: 0.8 },
+    { headerName: "Username", field: "username", flex: 0.8 },
+    { headerName: "Message", field: "message", flex: 1.4 }
   ];
 
   defaultColDef: ColDef = {
@@ -48,3 +49,4 @@ export class MessagelistComponent{
     });
   }
 }
+
