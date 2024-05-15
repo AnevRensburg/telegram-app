@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MessageService } from 'src/app/services/message.service';
 import { AgGridAngular } from "ag-grid-angular";
 import { ColDef, GridReadyEvent } from "ag-grid-community";
-import { WebsocketService } from 'src/app/services/websocket.service';
 
 // Row Data Interface
 interface IMessageData {
@@ -36,17 +35,26 @@ export class MessagelistComponent {
 
   constructor(
     private messageService: MessageService
-  ){}
+  ) { }
   
   // Get message list
   loadMessages(params: GridReadyEvent<IMessageData>) {
     this.messageService.getMessages().subscribe((records: any) => {
       // Convert time to local time
       records.forEach((record:any) => {
-        record.time = new Date(record.time).toLocaleString();
+        let date = new Date(record.time);
+        let formattedDate = date.toLocaleString();        
+        record.time = formattedDate;
       })
       this.rowData = records;
     });
+  }
+
+  onRowClicked(event: any) {
+    console.log('Row clicked: ', event.data);
+    console.log('Time Sent: ', event.data.time);
+    console.log('Sent By: ', event.data.username);
+    console.log('Message Content: ', event.data.message);
   }
 }
 

@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class MessageService {
   constructor(
-    private http: HttpClient
+    private http: HttpClient  
   ) {}
 
   authToken: any;

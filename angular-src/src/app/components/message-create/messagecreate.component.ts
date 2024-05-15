@@ -28,16 +28,11 @@ export class MessagecreateComponent {
         this.message = '';
         this.snackBar.open('Message sent successfully!', 'Close', {
           duration: 3000
-        });
-        // refreshPage();
-      } else{
+        })
+      }else{
         this.snackBar.open('Failed to send Message!', 'Close');
       }
     });
   }
 
-}
-
-function refreshPage() {
-  window.location.reload();
 }
