@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
+  public latestMessages = new BehaviorSubject<any>(1);
+
   constructor(
-    private http: HttpClient  
+    private http: HttpClient
   ) {}
 
-  authToken: any;
+  updateValue() {
+    this.latestMessages.next(1);
+  }
 
+  authToken: any;
+  
   // Store Message Data Locally (port 3000)
   storeMessageData(messageData: any){
     this.loadToken();

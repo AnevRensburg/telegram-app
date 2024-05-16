@@ -25,7 +25,7 @@ router.post("/message", passport.authenticate('jwt', {session:false}), async fun
   await save.saveMessage(newMessageObject);
   console.log('saveMessage returned');
   // Forward the message to the Telegram channel
-  // await forwardToTelegram(req.body.message);
+  await forwardToTelegram(req.body.message);
   res.send({success:true, msg: 'Message stored successfully and forwarded to Telegram channel'});
   console.log('Message stored successfully and forwarded to Telegram channel');
 });

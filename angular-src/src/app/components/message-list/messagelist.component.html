@@ -1,14 +1,14 @@
-<h1 class="page-header">Previous Messages</h1>
-<div class="content">
-  <ag-grid-angular
-    style="min-width: 655px; width: 100%; height: 500px;"
-    [class]="themeClass"
-    [rowData]="rowData"
-    [columnDefs]="colDefs"
-    [defaultColDef]="defaultColDef"
-    (gridReady)="loadMessages($event)"
-    (rowClicked)="onRowClicked($event)"
-  >
-  </ag-grid-angular> 
+<div class="messageListComponent">
+  <h1 class="page-header">Previous Messages</h1>
+  <div class="content">
+    <ag-grid-angular
+      style="min-width: 655px; width: 100%; height: 500px;"
+      [class]="themeClass"
+      [rowData]="rowData"
+      [columnDefs]="colDefs"
+      [defaultColDef]="defaultColDef"
+      (rowClicked)="onRowClicked($event)"
+    >
+    </ag-grid-angular> 
+  </div>
 </div>
-

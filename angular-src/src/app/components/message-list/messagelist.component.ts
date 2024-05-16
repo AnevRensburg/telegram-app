@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'src/app/services/message.service';
 import { AgGridAngular } from "ag-grid-angular";
 import { ColDef, GridReadyEvent } from "ag-grid-community";
@@ -18,7 +18,7 @@ interface IMessageData {
   styleUrls: ['./messagelist.component.scss'],
 })
 
-export class MessagelistComponent {
+export class MessagelistComponent implements OnInit{
   messages: any = [];
   themeClass = "ag-theme-quartz";
   rowData!: IMessageData[];
@@ -36,9 +36,16 @@ export class MessagelistComponent {
   constructor(
     private messageService: MessageService
   ) { }
+
+  ngOnInit() {
+    // Subscribe to latestMessages BehaviorSubject
+    this.messageService.latestMessages.subscribe((data: number) => {
+      this.loadMessages();
+    });
+  }  
   
   // Get message list
-  loadMessages(params: GridReadyEvent<IMessageData>) {
+  loadMessages(){
     this.messageService.getMessages().subscribe((records: any) => {
       // Convert time to local time
       records.forEach((record:any) => {

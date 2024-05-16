@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'src/app/services/message.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ElementRef } from '@angular/core';
+import { Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-messagecreate',
@@ -8,14 +13,24 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./messagecreate.component.scss']
 })
 
-export class MessagecreateComponent {
+export class MessagecreateComponent implements OnInit{
   message: any;
   messages: any[] = [];
 
+  @Output() dismiss = new EventEmitter;
+
   constructor(
     private messageService: MessageService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private elementRef: ElementRef
   ) {}
+
+  ngOnInit(){
+  }
+
+  onComposeClick(){
+    console.log("Compose button clicked");
+  }
 
   onMessageSubmit() { 
     // Get message content from form input
@@ -26,6 +41,7 @@ export class MessagecreateComponent {
     this.messageService.storeMessageData(messageData).subscribe((data:any) => {
       if(data.success) {
         this.message = '';
+        this.messageService.updateValue();
         this.snackBar.open('Message sent successfully!', 'Close', {
           duration: 3000
         })
@@ -34,5 +50,8 @@ export class MessagecreateComponent {
       }
     });
   }
+
+
+
 
 }
