@@ -1,11 +1,16 @@
 <h1 class="page-header">Send A Message</h1>
-<form>
-    <!-- (submit)="onMessageSubmit()" -->
-    <!-- <div class="form-group">
-        <label>Send a new message to a telegram channel</label>
+<input (click)="modalOpen = true" type="button" class="btn btn-compose" value="Compose A New Message">
+
+<app-modal (dismiss)="modalOpen = false" *ngIf="modalOpen">
+  <div modalTitle>
+    <h5 class="modal-title">New Message</h5>
+  </div>
+    <form>
+        <div class="form-group">
+            <label>Message</label>
             <textarea class="form-control messageField" [(ngModel)]="message" name="message">
             </textarea>
-    </div> -->
-    <input type="button" class="btn btn-success" value="Compose a new Message" (click)="onComposeClick()">
-    <!-- <input type="submit" class="btn btn-success" value="Submit"> -->
-</form>
+        </div>
+        <button (click)="onMessageSubmit()" type="button" class="btn btn-send">Send&ensp;<i class="fi fi-ss-paper-plane"></i></button>
+    </form> 
+</app-modal>

@@ -1,35 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MessageService } from 'src/app/services/message.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ElementRef } from '@angular/core';
-import { Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-
-
 
 @Component({
   selector: 'app-messagecreate',
   templateUrl: './messagecreate.component.html',
   styleUrls: ['./messagecreate.component.scss']
 })
-
-export class MessagecreateComponent implements OnInit{
+export class MessagecreateComponent{
   message: any;
-  messages: any[] = [];
-
-  @Output() dismiss = new EventEmitter;
+  modalOpen = false;
 
   constructor(
     private messageService: MessageService,
     private snackBar: MatSnackBar,
-    private elementRef: ElementRef
   ) {}
-
-  ngOnInit(){
-  }
 
   onComposeClick(){
     console.log("Compose button clicked");
+    this.modalOpen = !this.modalOpen;
+    // Add class to element
+    const body = document.getElementById('body');
+    if (body) {
+      body.classList.add('modal-open');
+    }
   }
 
   onMessageSubmit() { 
@@ -41,12 +35,16 @@ export class MessagecreateComponent implements OnInit{
     this.messageService.storeMessageData(messageData).subscribe((data:any) => {
       if(data.success) {
         this.message = '';
+        this.modalOpen = false;
         this.messageService.updateValue();
         this.snackBar.open('Message sent successfully!', 'Close', {
-          duration: 3000
-        })
+          duration: 4000, 
+          panelClass: ['success-snackbar']
+        });    
       }else{
-        this.snackBar.open('Failed to send Message!', 'Close');
+        this.snackBar.open('Failed to send message!', 'Close', {
+          panelClass: ['error-snackbar']
+        });
       }
     });
   }

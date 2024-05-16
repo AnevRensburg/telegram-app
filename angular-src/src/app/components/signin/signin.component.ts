@@ -28,19 +28,24 @@ export class SigninComponent {
 
     // Required Fields
     if(!this.validateService.validateSignup(user)){
-      this.snackBar.open('Please fill in all fields', 'Close');
+      this.snackBar.open('Please fill in all fields', 'Close', {
+        panelClass: ['error-snackbar']
+      });
     }
 
     // Signin User
     this.authService.signinUser(user.username, user.password).subscribe((data: any) => {
       if (data['success']){
         this.snackBar.open('Signin was a success!', 'Close', {
-          duration: 3000
+          duration: 3000, 
+          panelClass: ['success-snackbar']
         });
         this.authService.storeUserData(data.token, data.user);
         this.router.navigate(['/dashboard']);
       } else {
-        this.snackBar.open("Couldn't log in", 'Close');
+        this.snackBar.open("Failed to log in", 'Close', {
+          panelClass: ['error-snackbar']
+        });
         // Refresh the page
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['/signin']);

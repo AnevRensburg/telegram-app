@@ -28,18 +28,23 @@ export class SignupComponent {
 
     // Required Fields
     if(!this.validateService.validateSignup(user)){
-      this.snackBar.open('Please fill in all fields', 'Close');
+      this.snackBar.open('Please fill in all fields', 'Close', {
+          panelClass: ['error-snackbar']
+      });
     }
 
     // Signup User
     this.authService.signupUser(user).subscribe((data: any) => {
       if (data['success']){
         this.snackBar.open('Signup was a success!', 'Close', {
-          duration: 3000
+          duration: 3000, 
+          panelClass: ['success-snackbar']
         });
         this.router.navigate(['/signin']);
       } else {
-        this.snackBar.open("Couldn't sign up", 'Close');
+        this.snackBar.open("Failed to sign up", 'Close', {
+          panelClass: ['error-snackbar']
+        });
         this.router.navigate(['/signup']);
       }
     })

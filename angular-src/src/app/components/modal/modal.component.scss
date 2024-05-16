@@ -1,0 +1,25 @@
+.actions:empty{
+    display: none;
+}
+.actions-default{
+    display: none;
+}
+.actions:empty + .actions-default{
+    display: block;
+}
+
+.modal{
+    display: block;
+    position: fixed;
+    z-index: 6;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    // Don't allow scrolling
+    overflow: hidden;
+}
+
+/* Bootstrap CSS */
+@import 'bootstrap/dist/css/bootstrap.min.css';

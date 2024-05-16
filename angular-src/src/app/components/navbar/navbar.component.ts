@@ -18,8 +18,9 @@ export class NavbarComponent {
 
   onLogoutClick(){
     this.authService.logout();
-    this.snackBar.open('You are now logged out', 'Close', {
-      duration: 3000
+    this.snackBar.open('Logged out sucessfully', 'Close', {
+      duration: 3000, 
+      panelClass: ['success-snackbar']
     });
     this.router.navigate(['/signin']);
     return false;

@@ -1,0 +1,19 @@
+<div (click)="onDismissClick()" class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div (click)="$event.stopPropagation()" class="modal-dialog">
+    <div (click)="$event.stopPropagation()" class="modal-content">
+      <div class="modal-header header">
+        <ng-content select="[modalTitle]"></ng-content>
+        <button (click)="onDismissClick()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body content">
+        <ng-content></ng-content>
+      </div>
+      <div class="modal-footer actions actions-default">
+        <button (click)="onDismissClick()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+      <div class="actions">
+          <ng-content select="[modalFooter]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
