@@ -15,11 +15,26 @@
 
 <app-modal (dismiss)="modalOpen = false" *ngIf="modalOpen">
   <div modalTitle>
-    <h5 class="modal-title">Selected Message:</h5>
+    <h5 class="modal-title">Message content:</h5>
   </div>
   <p class="list-body">{{selectedMessage.message}}</p>
   <div modalFooter class="list-footer">
-    <p>Time sent:&ensp;<strong>{{selectedMessage.time}}</strong></p>
-    <p>Sent by:&ensp;<strong>{{selectedMessage.username}}</strong></p>
+    <table>
+      <tr>
+        <td>Sent by:&ensp;</td>
+        <td><strong>{{selectedMessage.username}}</strong></td>
+      </tr>
+      <tr>
+        <td>Time sent:&ensp;</td>
+        <td><strong>{{time}}</strong></td>
+      </tr>
+      <tr>
+        <td>Date sent:&ensp;</td>
+        <td><strong>{{date}}</strong></td>
+      </tr>
+    </table>
+    <!-- <p>Time sent:&ensp;<strong>{{time}}</strong></p>
+    <p>Date sent:&ensp;<strong>{{date}}</strong></p>
+    <p>Sent by:&ensp;<strong>{{selectedMessage.username}}</strong></p> -->
   </div>
 </app-modal>

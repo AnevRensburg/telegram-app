@@ -15,6 +15,7 @@ require('./config/passport')(passport);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const messagesRouter = require('./routes/messages');
+const telegramRouter = require('./routes/telegram');
 
 const app = express();
 
@@ -43,7 +44,7 @@ app.use(session({
 app.use(cors());
 
 // Port Number
-const port = 3001;
+// const port = 3001;
 
 // Set Static Folder
 app.set('views', path.join(__dirname, 'views'));
@@ -66,6 +67,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/messages', messagesRouter);
+app.use('/telegram', telegramRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
@@ -91,6 +93,21 @@ app.use(function(err, req, res, next) {
 
 // app.listen(port, () => {
 //   console.log('Server is running on port '+port);
+// });
+
+// Set up Telegram webhook
+// const axios = require('axios');
+// const botToken = private.botId;
+// const ngrokWebhookURL = 'https://53b2-152-110-129-247.ngrok-free.app/telegram';
+// const telegramAPIUrl = `https://api.telegram.org/bot${botToken}/setWebhook`;
+// axios.post(telegramAPIUrl, {
+//     url: ngrokWebhookURL
+// })
+// .then(response => {
+//     console.log('Webhook set up successfully:', response.data);
+// })
+// .catch(error => {
+//     console.error('Error setting up webhook:', error);
 // });
 
 module.exports = app;

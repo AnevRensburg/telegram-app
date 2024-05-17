@@ -22,6 +22,9 @@ export class MessagelistComponent implements OnInit{
   rowData!: IMessageData[];
   modalOpen = false;
   selectedMessage: any;
+  date!: String;
+  time!: String;
+  dateAndTime!: String;
 
   colDefs: ColDef<IMessageData>[] = [
     { headerName: "Timestamp", field: "time", flex: 0.8 },
@@ -49,9 +52,18 @@ export class MessagelistComponent implements OnInit{
     this.messageService.getMessages().subscribe((records: any) => {
       // Convert time to local time
       records.forEach((record:any) => {
-        let date = new Date(record.time);
-        let formattedDate = date.toLocaleString();        
-        record.time = formattedDate;
+        let newDate = new Date(record.time);
+        this.dateAndTime = newDate.toLocaleString(); 
+        record.time = this.dateAndTime;
+
+        this.time = newDate.toLocaleTimeString();
+
+        const options: Intl.DateTimeFormatOptions = {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        };
+        this.date = newDate.toLocaleDateString(undefined, options); 
       })
       this.rowData = records;
     });
