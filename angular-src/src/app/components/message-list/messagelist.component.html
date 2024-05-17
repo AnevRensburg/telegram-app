@@ -12,3 +12,14 @@
     </ag-grid-angular> 
   </div>
 </div>
+
+<app-modal (dismiss)="modalOpen = false" *ngIf="modalOpen">
+  <div modalTitle>
+    <h5 class="modal-title">Selected Message:</h5>
+  </div>
+  <p class="list-body">{{selectedMessage.message}}</p>
+  <div modalFooter class="list-footer">
+    <p>Time sent:&ensp;<strong>{{selectedMessage.time}}</strong></p>
+    <p>Sent by:&ensp;<strong>{{selectedMessage.username}}</strong></p>
+  </div>
+</app-modal>

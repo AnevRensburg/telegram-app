@@ -16,16 +16,6 @@ export class MessagecreateComponent{
     private snackBar: MatSnackBar,
   ) {}
 
-  onComposeClick(){
-    console.log("Compose button clicked");
-    this.modalOpen = !this.modalOpen;
-    // Add class to element
-    const body = document.getElementById('body');
-    if (body) {
-      body.classList.add('modal-open');
-    }
-  }
-
   onMessageSubmit() { 
     // Get message content from form input
     const messageData = {
@@ -36,11 +26,11 @@ export class MessagecreateComponent{
       if(data.success) {
         this.message = '';
         this.modalOpen = false;
-        this.messageService.updateValue();
         this.snackBar.open('Message sent successfully!', 'Close', {
           duration: 4000, 
           panelClass: ['success-snackbar']
-        });    
+        });
+        this.messageService.updateValue();
       }else{
         this.snackBar.open('Failed to send message!', 'Close', {
           panelClass: ['error-snackbar']

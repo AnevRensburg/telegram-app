@@ -11,8 +11,6 @@ interface IMessageData {
 }
 
 @Component({
-  standalone: true,
-  imports: [AgGridAngular],
   selector: 'app-messagelist',
   templateUrl: './messagelist.component.html',
   styleUrls: ['./messagelist.component.scss'],
@@ -22,6 +20,8 @@ export class MessagelistComponent implements OnInit{
   messages: any = [];
   themeClass = "ag-theme-quartz";
   rowData!: IMessageData[];
+  modalOpen = false;
+  selectedMessage: any;
 
   colDefs: ColDef<IMessageData>[] = [
     { headerName: "Timestamp", field: "time", flex: 0.8 },
@@ -58,10 +58,8 @@ export class MessagelistComponent implements OnInit{
   }
 
   onRowClicked(event: any) {
-    console.log('Row clicked: ', event.data);
-    console.log('Time Sent: ', event.data.time);
-    console.log('Sent By: ', event.data.username);
-    console.log('Message Content: ', event.data.message);
+    this.selectedMessage = event.data;
+    this.modalOpen = !this.modalOpen;
   }
 }
 
