@@ -9,7 +9,7 @@ const createError = require('http-errors');
 
 const mongoose = require('mongoose');
 const config = require('./config/database');
-const private = require('./private/private');
+const keys = require('./config/keys.js')
 const passport = require('passport');
 require('./config/passport')(passport);
 
@@ -34,7 +34,7 @@ mongoose.connection.on('error', (err) => {
 
 // Session Middleware
 app.use(session({
-  secret: private.secret,
+  secret: keys.secret,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: true }

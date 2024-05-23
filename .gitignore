@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# private.js file
-private.js
+# keys.js file
+keys.js
 
 # Compiled output
 /dist

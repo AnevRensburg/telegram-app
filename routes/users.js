@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport'); 
 const jwt = require('jsonwebtoken');
-const private = require('../private/private');
+const keys = require('../config/keys');
 const save = require('../models/save');
 
 // Register User
@@ -38,7 +38,7 @@ router.post("/login", async function(req, res, next) {
       return res.json({success: false, msg: 'Wrong Password'});
     }
     // else, create a token with the user object and the secret key
-    const token = jwt.sign({username: user.username}, private.secret, {
+    const token = jwt.sign({username: user.username}, keys.secret, {
         expiresIn: 604800 // 1 week
     });
 

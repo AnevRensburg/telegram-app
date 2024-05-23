@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const save = require('../models/save');
 const { Telegraf } = require('telegraf');
-const private = require('../private/private');
+const keys = require('../config/keys');
 
 router.get('/', function(req, res, next) {
     res.send('hi, this is the telegram route');

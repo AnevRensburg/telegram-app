@@ -3,7 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const save = require('../models/save');
 const { Telegraf } = require('telegraf');
-const private = require('../private/private');
+const keys = require('../config/keys');
 
 // Get messages back from the database
 router.get("/", async function(req, res, next) {
@@ -13,9 +13,9 @@ router.get("/", async function(req, res, next) {
 });
 
 // Bot ID
-const bot = new Telegraf(private.botId);
+const bot = new Telegraf(keys.botId);
 // Channel ID
-const channelId = private.channelId;
+const channelId = keys.channelId;
 // Function to forward messages to the Telegram channel
 async function forwardToTelegram(message) {
     bot.telegram.sendMessage(channelId, message);
