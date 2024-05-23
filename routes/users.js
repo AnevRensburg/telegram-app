@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken');
 const private = require('../private/private');
 const save = require('../models/save');
 
-// Signup User
-router.post("/signup", async function(req, res, next) {
+// Register User
+router.post("/register", async function(req, res, next) {
   console.log('req body', req.body);
 
   let newUserObject = new save.User({
@@ -17,12 +17,12 @@ router.post("/signup", async function(req, res, next) {
 
   await save.saveUser(newUserObject);
   console.log('saveUser returned');
-  res.send({success:true, msg: 'User signed up successfully'});
+  res.send({success:true, msg: 'User registered successfully'});
 });
 
 
-// Signin User
-router.post("/signin", async function(req, res, next) {
+// Log User In
+router.post("/login", async function(req, res, next) {
   console.log('Request body', req.body);
 
   const username = req.body.username;
@@ -52,7 +52,7 @@ router.post("/signin", async function(req, res, next) {
     });
   } catch (err) { 
     console.error(err);
-    res.json({success: false, msg: 'An error occurred while trying to sign in.'});
+    res.json({success: false, msg: 'An error occurred while trying to log in.'});
   }
 });
 
@@ -67,10 +67,21 @@ router.get("/profile", passport.authenticate('jwt', {session:false}), async func
   }
 });
 
-// Get users back from the database
-router.get("/", async function(req, res, next) {
-  let returnedArray = await save.getUsers();
-  res.send(returnedArray);
+// Check if user exists
+
+router.post("/", async function(req, res, next) {
+  const username = req.body.username;
+  try {
+    const user = await save.getUserByUsername(username);
+    if(!user){
+      return res.json({success: true, msg: 'User does not yet exist'});
+    } else {
+      return res.json({success: false, msg: 'User already exists'});
+    }
+  } catch (err) {
+    console.error(err);
+    res.json({success: false, msg: 'An error occurred while trying to sign up.'});
+  }
 });
 
 module.exports = router;

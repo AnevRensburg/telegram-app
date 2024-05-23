@@ -17,13 +17,12 @@ const messageShape = mongoose.Schema ({
 
 const Message = mongoose.model('Message', messageShape);
 
-async function saveMessage(newMessageObject){
-    newMessageObject.save();
-}
-
-
 function getMessages(){
     return Message.find().sort({time:-1});
+}
+
+async function saveMessage(newMessageObject){
+    newMessageObject.save();
 }
 
 
@@ -88,11 +87,9 @@ async function comparePassword(candidatePassword, hash){
 
 // All Exports
 module.exports = {
-    //Messages
     Message: Message,
     saveMessage: saveMessage,
     getMessages: getMessages,
-    //Users
     User: User,
     saveUser: saveUser,
     getUsers: getUsers,

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MessageService } from 'src/app/services/message.service';
+import { ValidateService } from 'src/app/services/validate.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -13,6 +14,7 @@ export class MessagecreateComponent{
 
   constructor(
     private messageService: MessageService,
+    private validateService: ValidateService,
     private snackBar: MatSnackBar,
   ) {}
 
@@ -21,6 +23,20 @@ export class MessagecreateComponent{
     const messageData = {
       message: this.message
     }
+
+    // Check if message is valid
+    if(this.validateService.validateMessage(messageData.message) === 'Message empty'){
+      this.snackBar.open('Please type a message', 'Close', {
+          panelClass: ['error-snackbar']
+      });
+      return false;
+    } else if (this.validateService.validateMessage(messageData.message) === 'Message too long'){
+      this.snackBar.open('Exceeds 4000 characters', 'Close', {
+          panelClass: ['error-snackbar']
+      });
+      return false;
+    }
+
     // Store message content Locally
     this.messageService.storeMessageData(messageData).subscribe((data:any) => {
       if(data.success) {
@@ -37,6 +53,11 @@ export class MessagecreateComponent{
         });
       }
     });
+    return false;
+  }
+
+  onDiscard(){
+    this.message = '';
   }
 
 

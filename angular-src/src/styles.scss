@@ -7,6 +7,8 @@
 
 @import "@flaticon/flaticon-uicons/css/all/all";
 
+
+// Buttons 
 .btn{
     background-color: #56cc9d;
     color: #fff;
@@ -20,7 +22,74 @@
 }
 .btn-send{
     padding-top: 8px;
+    margin: 0 10px 0 0;
 }
+.btn-auth{
+  margin-top: 20px;
+  min-width: 120px;
+}
+.btn-red{
+  background-color: #ca3535;
+  color: #fff;
+}
+.btn-red:hover{
+  background-color: #ab1f1f;
+  color: #fff;
+}
+
+.exit-container {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  flex-direction: row;
+}
+.btn-exit {
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  box-sizing: border-box;
+  width: 35px;
+  height: 35px;
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 20px;
+    background-color: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    transition: ease-out .3s all;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 20px;
+    background-color: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: ease-out .3s all;
+  }
+  &:hover, &:focus {
+    &:before {
+      transform: translate(-50%, -50%) rotate(135deg);
+    }
+    &:after {
+      transform: translate(-50%, -50%) rotate(225deg);
+    }
+  }
+}
+
+
+
+// Ag-Grid
 .ag-header-row{
     background-color: #56cc9d;
     color: #fff;
@@ -35,6 +104,8 @@ ag-grid-angular {
     min-width: 500px;
     height: 500px;
 }
+
+
 
 .modal-header{
   margin: 0;
@@ -57,6 +128,12 @@ ag-grid-angular {
   font-weight: 400;
   color: #fff;
   background-color: #56cc9d !important;
+}
+
+.compose-footer{
+  text-align: left;
+  padding: 10px 15px;
+  background-color: #fff !important;
 }
 
 // Snackbar on Success

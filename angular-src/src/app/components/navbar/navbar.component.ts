@@ -17,12 +17,12 @@ export class NavbarComponent {
     ) { }
 
   onLogoutClick(){
-    this.authService.logout();
-    this.snackBar.open('Logged out sucessfully', 'Close', {
+    this.authService.logOut();
+    this.snackBar.open('Logged out successfully', 'Close', {
       duration: 3000, 
       panelClass: ['success-snackbar']
     });
-    this.router.navigate(['/signin']);
+    this.router.navigate(['/login']);
     return false;
   }
 

@@ -19,13 +19,13 @@ export class MessageService {
   authToken: any;
   
   // Store Message Data Locally (port 3000)
-  storeMessageData(messageData: any){
+  storeMessageData(message: any){
     this.loadToken();
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.authToken
     });
-    return this.http.post('http://localhost:3000/messages/message', messageData, {headers: headers, responseType:'json'});
+    return this.http.post('http://localhost:3000/messages/message', message, {headers: headers, responseType:'json'});
   }
 
   // Get Message Data Locally (port 3000)

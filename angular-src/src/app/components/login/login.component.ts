@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class SignupComponent {
+export class LoginComponent {
   username!: string;
   password!: string;
 
@@ -20,34 +20,40 @@ export class SignupComponent {
     private snackBar: MatSnackBar
   ){}
 
-  onSignupSubmit(){
+  onLoginSubmit(){
     const user = {
       username: this.username,
       password: this.password
     }
 
     // Required Fields
-    if(!this.validateService.validateSignup(user)){
+    if(!this.validateService.validateFields(user)){
       this.snackBar.open('Please fill in all fields', 'Close', {
-          panelClass: ['error-snackbar']
+        panelClass: ['error-snackbar']
       });
+      return false;
     }
 
-    // Signup User
-    this.authService.signupUser(user).subscribe((data: any) => {
+    // Log User In
+    this.authService.loginUser(user.username, user.password).subscribe((data: any) => {
       if (data['success']){
-        this.snackBar.open('Signup was a success!', 'Close', {
+        this.snackBar.open('Log in was a success!', 'Close', {
           duration: 3000, 
           panelClass: ['success-snackbar']
         });
-        this.router.navigate(['/signin']);
+        this.authService.storeUserData(data.token, data.user);
+        this.router.navigate(['/dashboard']);
       } else {
-        this.snackBar.open("Failed to sign up", 'Close', {
+        this.snackBar.open("Wrong username or password", 'Close', {
           panelClass: ['error-snackbar']
         });
-        this.router.navigate(['/signup']);
+        this.username = '';
+        this.password = '';
       }
     })
+    return false;
   }
+  
 
 }
+

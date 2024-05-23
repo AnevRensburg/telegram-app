@@ -27,9 +27,9 @@ export class MessagelistComponent implements OnInit{
   dateAndTime!: String;
 
   colDefs: ColDef<IMessageData>[] = [
-    { headerName: "Timestamp", field: "time", flex: 0.8 },
-    { headerName: "Username", field: "username", flex: 0.8 },
-    { headerName: "Message", field: "message", flex: 1.4 }
+    { headerName: "Timestamp", field: "time", flex: 1 },
+    { headerName: "Username", field: "username", flex: 0.7 },
+    { headerName: "Message", field: "message", flex: 1.7 }
   ];
 
   defaultColDef: ColDef = {

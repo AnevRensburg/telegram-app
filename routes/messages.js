@@ -5,6 +5,13 @@ const save = require('../models/save');
 const { Telegraf } = require('telegraf');
 const private = require('../private/private');
 
+// Get messages back from the database
+router.get("/", async function(req, res, next) {
+
+  let returnedArray = await save.getMessages();
+  res.send(returnedArray);
+});
+
 // Bot ID
 const bot = new Telegraf(private.botId);
 // Channel ID
@@ -27,13 +34,6 @@ router.post("/message", passport.authenticate('jwt', {session:false}), async fun
   await forwardToTelegram(req.body.message);
   res.send({success:true, msg: 'Message stored successfully and forwarded to Telegram channel'});
   console.log('Message stored successfully and forwarded to Telegram channel');
-});
-
-// Get messages back from the database
-router.get("/", async function(req, res, next) {
-
-  let returnedArray = await save.getMessages();
-  res.send(returnedArray);
 });
 
 // Start your bot

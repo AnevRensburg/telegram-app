@@ -11,6 +11,9 @@
             <textarea class="form-control messageField" [(ngModel)]="message" name="message">
             </textarea>
         </div>
-        <button (click)="onMessageSubmit()" type="button" class="btn btn-send">Send&ensp;<i class="fi fi-ss-paper-plane"></i></button>
     </form> 
+  <div modalFooter class="compose-footer">
+    <button (click)="onMessageSubmit()" type="button" class="btn btn-send">Send&ensp;<i class="fi fi-ss-paper-plane"></i></button>
+    <button (click)="onDiscard()" type="button" class="btn btn-red">Restart&ensp;<i class="fi fi-br-rotate-right"></i></button>
+  </div>
 </app-modal>

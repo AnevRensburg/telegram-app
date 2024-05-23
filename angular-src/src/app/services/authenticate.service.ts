@@ -16,16 +16,16 @@ export class AuthService {
     public jwtHelper: JwtHelperService
     ) { }
 
-  signupUser(user: any){
+  registerUser(user: any){
     let headers = new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/signup', user, {headers: headers, responseType:'json'});
+    return this.http.post('http://localhost:3000/users/register', user, {headers: headers, responseType:'json'});
   }
 
-  signinUser(username: string, password: string){
+  loginUser(username: string, password: string){
     let headers = new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/signin', {username: username, password:password}, {headers: headers, responseType:'json'});
+    return this.http.post('http://localhost:3000/users/login', {username: username, password:password}, {headers: headers, responseType:'json'});
   }
 
   getProfile(): Observable<any>{
@@ -48,7 +48,7 @@ export class AuthService {
     this.authToken = token;
   }
 
-  logout(){
+  logOut(){
     this.authToken = null;
     this.user = null;
     localStorage.clear();

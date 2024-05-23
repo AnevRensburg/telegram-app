@@ -1,14 +1,15 @@
-const createError = require('http-errors');
 const express = require('express');
 const session = require('express-session');
-const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
+const createError = require('http-errors');
 
 const mongoose = require('mongoose');
 const config = require('./config/database');
+const private = require('./private/private');
 const passport = require('passport');
 require('./config/passport')(passport);
 
@@ -19,7 +20,6 @@ const telegramRouter = require('./routes/telegram');
 
 const app = express();
 
-const private = require('./private/private');
 
 // Connect to database
 mongoose.connect(config.database);
@@ -42,9 +42,6 @@ app.use(session({
 
 // CORS Middleware
 app.use(cors());
-
-// Port Number
-// const port = 3001;
 
 // Set Static Folder
 app.set('views', path.join(__dirname, 'views'));
@@ -73,41 +70,9 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
-// // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-//   // render the error page
-// //   res.status(err.status || 500);
-// //   res.render('error');
-});
-
-
-// app.listen(port, () => {
-//   console.log('Server is running on port '+port);
-// });
-
-// Set up Telegram webhook
-// const axios = require('axios');
-// const botToken = private.botId;
-// const ngrokWebhookURL = 'https://53b2-152-110-129-247.ngrok-free.app/telegram';
-// const telegramAPIUrl = `https://api.telegram.org/bot${botToken}/setWebhook`;
-// axios.post(telegramAPIUrl, {
-//     url: ngrokWebhookURL
-// })
-// .then(response => {
-//     console.log('Webhook set up successfully:', response.data);
-// })
-// .catch(error => {
-//     console.error('Error setting up webhook:', error);
-// });
 
 module.exports = app;
