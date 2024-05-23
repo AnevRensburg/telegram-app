@@ -46,7 +46,7 @@ Once you have these installed, proceed with the steps below.
    ```bash
     code .
     ```
-5. **Navigate into the 'config' folder and create a file called private.js**:
+5. **Navigate into the 'config' folder and create a file called keys.js**:
     ```bash
     cd config
     ``` 
