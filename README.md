@@ -104,5 +104,5 @@ Once you have these installed, proceed with the steps below.
 
 **Note:** You can change the MongoDB database configuration in `config/database.js`.
 
-If you encounter any errors or need assistance, please feel free to contact me directly at [anejvr06@gmail.com](mailto:anejvr06@gmail.com). I am here to help!
+If you encounter any errors or need assistance, please feel free to contact me directly at [anejvr06@gmail.com](mailto:anejvr06@gmail.com).
 
