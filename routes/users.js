@@ -7,14 +7,11 @@ const save = require('../models/save');
 
 // Register User
 router.post("/register", async function(req, res, next) {
-  console.log('req body', req.body);
-
   let newUserObject = new save.User({
     username: req.body.username,
     password: req.body.password,
     time: new Date()
   });
-
   await save.saveUser(newUserObject);
   console.log('saveUser returned');
   res.send({success:true, msg: 'User registered successfully'});
